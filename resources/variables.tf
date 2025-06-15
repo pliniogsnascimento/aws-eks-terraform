@@ -9,3 +9,7 @@ variable "enable_argocd" {
 variable "enable_metrics_server" {
   default = false
 }
+
+variable "k8s_version" {
+  default = "1.33"
+}

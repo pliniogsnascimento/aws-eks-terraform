@@ -12,3 +12,8 @@ resource "aws_eks_addon" "eks-addon-coredns" {
   cluster_name = aws_eks_cluster.gitops_eks.name
   addon_name   = "coredns"
 }
+
+resource "aws_eks_addon" "eks-addon-pod-identity" {
+  cluster_name = aws_eks_cluster.gitops_eks.name
+  addon_name   = "eks-pod-identity-agent"
+}

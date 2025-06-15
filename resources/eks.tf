@@ -1,7 +1,7 @@
 resource "aws_eks_cluster" "gitops_eks" {
   name     = var.cluster_name
   role_arn = aws_iam_role.eks-cluster-role.arn
-  version  = "1.32"
+  version  = var.k8s_version
 
   tags = {
     Name = var.cluster_name
@@ -35,12 +35,13 @@ resource "aws_eks_node_group" "eks_ng_1" {
   ]
 
   capacity_type  = "SPOT"
-  instance_types = ["t3.small"]
+  instance_types = ["t4g.small"]
+  ami_type = "BOTTLEROCKET_ARM_64"
 
   scaling_config {
     desired_size = 3
     max_size     = 6
-    min_size     = 1
+    min_size     = 2
   }
 
   update_config {
@@ -52,6 +53,10 @@ resource "aws_eks_node_group" "eks_ng_1" {
     aws_iam_role_policy_attachment.gitops-AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.gitops-AmazonEKS_CNI_Policy
   ]
+
+  lifecycle {
+    ignore_changes = [scaling_config[0].desired_size]
+  }
 
   tags = {
     "kubernetes.io/cluster/cluster-name/${var.cluster_name}" = "owned"
