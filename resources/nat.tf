@@ -1,5 +1,5 @@
 resource "aws_eip" "nat_eip" {
-  vpc = true
+  domain = "vpc"
 
   tags = {
     Name = "gitops-nat-eip"

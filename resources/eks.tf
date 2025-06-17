@@ -3,6 +3,10 @@ resource "aws_eks_cluster" "gitops_eks" {
   role_arn = aws_iam_role.eks-cluster-role.arn
   version  = var.k8s_version
 
+  access_config {
+    authentication_mode = "API_AND_CONFIG_MAP"
+  }
+
   tags = {
     Name = var.cluster_name
   }
