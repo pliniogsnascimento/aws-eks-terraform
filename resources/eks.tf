@@ -44,8 +44,8 @@ resource "aws_eks_node_group" "eks_ng_1" {
 
   scaling_config {
     desired_size = var.desired_size
-    max_size     = var.min_size
-    min_size     = var.max_size
+    max_size     = var.max_size
+    min_size     = var.min_size
   }
 
   update_config {
