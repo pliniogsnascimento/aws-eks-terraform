@@ -13,3 +13,19 @@ variable "enable_metrics_server" {
 variable "k8s_version" {
   default = "1.33"
 }
+
+variable "taints" {
+  default = []
+}
+
+variable "min_size" {
+  default = 2
+}
+
+variable "max_size" {
+  default = 6
+}
+
+variable "desired_size" {
+  default = 3
+}

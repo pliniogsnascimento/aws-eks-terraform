@@ -43,9 +43,9 @@ resource "aws_eks_node_group" "eks_ng_1" {
   ami_type = "BOTTLEROCKET_ARM_64"
 
   scaling_config {
-    desired_size = 3
-    max_size     = 6
-    min_size     = 2
+    desired_size = var.desired_size
+    max_size     = var.min_size
+    min_size     = var.max_size
   }
 
   update_config {
@@ -60,6 +60,15 @@ resource "aws_eks_node_group" "eks_ng_1" {
 
   lifecycle {
     ignore_changes = [scaling_config[0].desired_size]
+  }
+
+  dynamic "taint" {
+    for_each = var.taints
+    content {
+      key = taint.value["key"]
+      effect = taint.value["effect"]
+      value = taint.value["value"]
+    }
   }
 
   tags = {
