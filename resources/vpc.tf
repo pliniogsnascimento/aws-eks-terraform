@@ -21,6 +21,7 @@ resource "aws_subnet" "private_subnet_1" {
   tags = {
     Name                                        = "private_subnet_1",
     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "karpenter.sh/discovery"                    = var.cluster_name
   }
 }
 
@@ -33,6 +34,7 @@ resource "aws_subnet" "private_subnet_2" {
   tags = {
     Name                                        = "private_subnet_2",
     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "karpenter.sh/discovery"                    = var.cluster_name
   }
 }
 
@@ -45,7 +47,7 @@ resource "aws_subnet" "private_subnet_3" {
   tags = {
     Name                                        = "private_subnet_3",
     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
-
+    "karpenter.sh/discovery"                    = var.cluster_name
   }
 }
 

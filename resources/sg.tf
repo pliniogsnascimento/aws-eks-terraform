@@ -44,5 +44,6 @@ resource "aws_security_group" "cluster_nodes_sg" {
 
   tags = {
     Name = "cluster nodes sg"
+    "karpenter.sh/discovery" = var.cluster_name
   }
 }
