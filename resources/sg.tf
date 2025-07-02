@@ -32,7 +32,8 @@ resource "aws_security_group" "allow_http" {
 }
 
 resource "aws_security_group" "cluster_nodes_sg" {
-  name = "cluster-nodes-sg"
+  name        = "cluster-nodes-sg"
+  vpc_id      = aws_vpc.eks_vpc.id
 
   egress {
     from_port = 0
