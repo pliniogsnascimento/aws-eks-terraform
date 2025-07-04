@@ -35,6 +35,14 @@ resource "aws_security_group" "cluster_nodes_sg" {
   name        = "cluster-nodes-sg"
   vpc_id      = aws_vpc.eks_vpc.id
 
+  ingress {
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "allow all"
+    from_port   = 0
+    protocol    = "tcp"
+    to_port     = 65535
+  }
+
   egress {
     from_port = 0
     to_port   = 0
